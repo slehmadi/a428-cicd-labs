@@ -8,6 +8,13 @@ node {
             checkout scm
             sh './jenkins/scripts/test.sh'
         }
+        stage('Build image') {
+            checkout scm
+            withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')])
+            sh 'docker build -t slehmadi/react-app-cicd-dicoding .'
+            sh 'docker login -u $USER -p $PASS'
+            sh 'docker push slehmadi/react-app-cicd-dicoding'
+        }
         stage('Manual Approval') {
             checkout scm
             input message: 'Lanjutkan ke tahap Deploy?'
