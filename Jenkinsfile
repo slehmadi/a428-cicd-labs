@@ -10,10 +10,11 @@ node {
         }
         stage('Build image') {
             checkout scm
-            withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')])
-            sh 'docker build -t slehmadi/react-app-cicd-dicoding .'
-            sh 'docker login -u $USER -p $PASS'
-            sh 'docker push slehmadi/react-app-cicd-dicoding'
+            withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                sh 'docker build -t slehmadi/react-app-cicd-dicoding .'
+                sh 'docker login -u $USER -p $PASS'
+                sh 'docker push slehmadi/react-app-cicd-dicoding'
+            }
         }
         stage('Manual Approval') {
             checkout scm
