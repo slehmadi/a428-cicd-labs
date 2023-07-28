@@ -6,4 +6,4 @@ COPY . .
 
 RUN npm install
 
-ENTRYPOINT ['./jenkins/scripts/deliver.sh']
+CMD ['./jenkins/scripts/deliver.sh']
