@@ -24,7 +24,8 @@ node {
     stage('Deploy') {
         checkout scm
         sshagent(['ec2-server-key']) {
-            sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker pull slehmadi/react-app-cicd-dicoding && sudo docker run -p 3000:3000 -d --rm slehmadi/react-app-cicd-dicoding sleep 60"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker pull slehmadi/react-app-cicd-dicoding"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker run -p 3000:3000 -d --rm slehmadi/react-app-cicd-dicoding sleep 60 && echo app has been deployed for 1 minute"
         }
     }
 }
