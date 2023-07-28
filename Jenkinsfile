@@ -25,7 +25,7 @@ node {
         checkout scm
         sshagent(['ec2-server-key']) {
             sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker pull slehmadi/react-app-cicd-dicoding"
-            sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker run -p 3000:3000 -d --rm slehmadi/react-app-cicd-dicoding"
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker run -p 3000:3000 -d slehmadi/react-app-cicd-dicoding sleep 300"
         }
     }
 }
