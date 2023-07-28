@@ -19,15 +19,13 @@ node {
             sh './jenkins/scripts/kill.sh'
         }
     }
-    docker.image('ubuntu').inside('-p 3000:3000') {
-        stage('Build Image') {
-            checkout scm
-            sh 'apt install docker.io -y'
-            withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                sh 'docker build -t slehmadi/react-app-cicd-dicoding .'
-                sh 'docker login -u $USER -p $PASS'
-                sh 'docker push slehmadi/react-app-cicd-dicoding'
-            }
+    stage('Build Image') {
+        checkout scm
+        sh 'apt install docker.io -y'
+        withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+            sh 'docker build -t slehmadi/react-app-cicd-dicoding .'
+            sh 'docker login -u $USER -p $PASS'
+            sh 'docker push slehmadi/react-app-cicd-dicoding'
         }
     }
 }
