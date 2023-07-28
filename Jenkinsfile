@@ -10,6 +10,7 @@ node {
         }
         stage('Build image') {
             checkout scm
+            sh 'apt install docker.io -y'
             withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                 sh 'docker build -t slehmadi/react-app-cicd-dicoding .'
                 sh 'docker login -u $USER -p $PASS'
