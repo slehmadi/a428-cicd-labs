@@ -6,4 +6,4 @@ COPY . .
 
 RUN npm install
 
-CMD ['./jenkins/scripts/deliver.sh']
+RUN ./jenkins/scripts/deliver.sh
