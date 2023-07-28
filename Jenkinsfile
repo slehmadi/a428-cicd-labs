@@ -26,7 +26,7 @@ node {
         sshagent(['ec2-server-key']) {
             sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker pull slehmadi/react-app-cicd-dicoding"
             sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker run --rm -d --name webserver -p 3000:3000 slehmadi/react-app-cicd-dicoding npm run start"
-            sh "echo deploy has been deployed for 1 minute"
+            sh "echo deploy has been deployed for 1 minute && sleep 60"
             sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker stop webserver"
             sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker rmi slehmadi/react-app-cicd-dicoding"
         }
