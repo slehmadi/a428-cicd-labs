@@ -11,7 +11,7 @@ node {
         stage('Deploy') {
             checkout scm
             sh './jenkins/scripts/deliver.sh'
-            input message: 'Sudah selesai? (klik "Proceed" untuk mengakhiri)'
+            sh 'sleep 60'
             sh './jenkins/scripts/kill.sh'
         }
     }
