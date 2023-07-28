@@ -19,7 +19,7 @@ node {
             sh './jenkins/scripts/kill.sh'
         }
     }
-    docker.image('ubuntu:alpine').inside('-p 3000:3000') {
+    docker.image('ubuntu').inside('-p 3000:3000') {
         stage('Build Image') {
             checkout scm
             sh 'apt update && apt install docker.io -y'
