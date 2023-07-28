@@ -8,5 +8,11 @@ node {
             checkout scm
             sh './jenkins/scripts/test.sh'
         }
+        stage('Deploy') {
+            checkout scm
+            sh './jenkins/scripts/deliver.sh'
+            input message: 'Sudah selesai? (klik "Proceed" untuk mengakhiri)'
+            sh './jenkins/scripts/kill.sh'
+        }
     }
 }
