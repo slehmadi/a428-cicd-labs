@@ -8,16 +8,6 @@ node {
             checkout scm
             sh './jenkins/scripts/test.sh'
         }
-        stage('Manual Approval') {
-            checkout scm
-            input message: 'Lanjutkan ke tahap Deploy?'
-        }
-        stage('Deploy') {
-            checkout scm
-            sh './jenkins/scripts/deliver.sh'
-            sh 'sleep 60'
-            sh './jenkins/scripts/kill.sh'
-        }
     }
     stage('Build Image') {
         checkout scm
@@ -26,5 +16,9 @@ node {
             sh 'docker login -u $USER -p $PASS'
             sh 'docker push slehmadi/react-app-cicd-dicoding'
         }
+    }
+    stage('Manual Approval') {
+        checkout scm
+        input message: 'Lanjutkan ke tahap Deploy?'
     }
 }
