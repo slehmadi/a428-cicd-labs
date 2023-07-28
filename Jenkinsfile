@@ -23,10 +23,8 @@ node {
     }
     stage('Deploy') {
         checkout scm
-        script {
-            sshagent(['ec2-server-key']) {
-                sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 docker run -p 3000:3000 -d --rm slehmadi/react-app-cicd sleep 60"
-            }
+        sshagent(['ec2-server-key']) {
+            sh "ssh -o StrictHostKeyChecking=no ubuntu@13.212.240.207 sudo docker run -p 3000:3000 -d --rm slehmadi/react-app-cicd sleep 60"
         }
     }
 }
